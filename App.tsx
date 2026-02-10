@@ -4,6 +4,8 @@ import { MENTORS, PROCESS_STEPS, STUDENT_CASES } from './constants';
 
 const App: React.FC = () => {
   const [isVisible, setIsVisible] = useState<{ [key: string]: boolean }>({});
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+  const [lightboxAlt, setLightboxAlt] = useState<string>('');
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -22,14 +24,20 @@ const App: React.FC = () => {
   }, []);
 
   return (
+    <>
     <div className="max-w-md mx-auto min-h-screen relative shadow-2xl overflow-x-hidden bg-[#fffbf5]">
       
       {/* 00. Cover Section */}
-      <section id="cover" className="relative min-h-[85vh] bg-[#ee9124] p-10 flex flex-col justify-center text-white overflow-hidden">
+      <section id="cover" className="relative min-h-[65vh] bg-[#ee9124] p-10 flex flex-col justify-center text-white overflow-hidden">
         <div className="mt-0">
-          <h1 className="text-[72px] font-bold leading-none mb-3 tracking-tighter drop-shadow-sm">
-            留学<br />指南
-          </h1>
+          <div className="flex items-start gap-4">
+            <h1 className="text-[72px] font-bold leading-none mb-3 tracking-tighter drop-shadow-sm">
+              留学<br />指南
+            </h1>
+            <p className="text-[1.25rem] text-white font-medium leading-snug mt-16">
+              YUSHI医学留学
+            </p>
+          </div>
           <p className="text-xl font-medium tracking-widest opacity-95">
             医学/心理学留学领航者
           </p>
@@ -54,6 +62,12 @@ const App: React.FC = () => {
               </p>
               <p className="text-lg font-bold tracking-tight">
                 +44 07419735373 <span className="text-[10px] font-light opacity-70">(英国)</span>
+              </p>
+              <p className="text-sm font-medium tracking-tight">
+                以医学与心理学为核心
+              </p>
+              <p className="text-sm font-medium tracking-tight">
+                提供覆盖学术成长与职业发展的全路径支撑
               </p>
             </div>
           </div>
@@ -207,7 +221,7 @@ const App: React.FC = () => {
                     <a href="/images/11.png" target="_blank" rel="noopener noreferrer" className="block w-full h-full"><img
                       src="/images/11.png"
                       alt="Visa and pre-departure visual 2"
-                      className="w-full h-full object-contain"
+                      className="w-full h-full"
                     /></a>
                   </div>
                 </div>
@@ -400,7 +414,65 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* 05. Student Cases */}
+      {/* 05. Partners */}
+      <section id="partners" className={`scroll-reveal relative mt-2 pb-6 ${isVisible['partners'] ? 'visible' : ''}`}>
+        <div className="px-8 mb-4 flex items-center gap-3">
+          <div className="w-1.5 h-8 orange-gradient rounded-full"></div>
+          <h2 className="text-2xl font-bold text-slate-900 serif">世界名校的合作伙伴</h2>
+        </div>
+        <div className="px-8 flex items-center gap-3">
+          <div className="relative aspect-[4/3] flex-1 rounded-xl border-2 border-orange-200 overflow-hidden shadow-sm bg-white">
+            <img
+              src="/images/p1.png"
+              alt="Partner logo 1"
+              className="w-full h-full object-contain"
+            />
+          </div>
+          <div className="relative aspect-[4/3] flex-1 rounded-xl border-2 border-orange-200 overflow-hidden shadow-sm bg-white">
+            <img
+              src="/images/p2.jpg"
+              alt="Partner logo 2"
+              className="w-full h-full object-contain"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 06. Reviews */}
+      <section id="reviews" className={`scroll-reveal relative mt-2 pb-6 ${isVisible['reviews'] ? 'visible' : ''}`}>
+        <div className="px-8 mb-4 flex items-center gap-3">
+          <div className="w-1.5 h-8 orange-gradient rounded-full"></div>
+          <h2 className="text-2xl font-bold text-slate-900 serif">学员案例及好评分享</h2>
+        </div>
+        <div className="px-8 grid grid-cols-3 gap-3">
+          {[
+            { src: "/images/h1.jpg", alt: "Review image 1" },
+            { src: "/images/h2.jpg", alt: "Review image 2" },
+            { src: "/images/h3.jpg", alt: "Review image 3" },
+            { src: "/images/h4.png", alt: "Review image 4" },
+            { src: "/images/h5.png", alt: "Review image 5" },
+            { src: "/images/h6.png", alt: "Review image 6" },
+          ].map((item, i) => (
+            <button
+              key={i}
+              type="button"
+              className="relative aspect-[4/3] rounded-xl border-2 border-orange-200 overflow-hidden shadow-sm bg-white"
+              onClick={() => {
+                setLightboxSrc(item.src);
+                setLightboxAlt(item.alt);
+              }}
+            >
+              <img
+                src={item.src}
+                alt={item.alt}
+                className="w-full h-full object-contain"
+              />
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* 07. Student Cases */}
       <section id="cases" className={`scroll-reveal relative mt-2 pb-10 ${isVisible['cases'] ? 'visible' : ''}`}>
         <div className="px-8 mb-6 flex items-center gap-3">
           <div className="w-1.5 h-8 orange-gradient rounded-full"></div>
@@ -490,8 +562,68 @@ const App: React.FC = () => {
               className="w-full h-full object-contain"
             /></a>
           </div>
+          <div className="relative aspect-[3/4] rounded-xl border-2 border-orange-200 overflow-hidden shadow-sm bg-white">
+            <a href="/images/off7.png" target="_blank" rel="noopener noreferrer" className="block w-full h-full"><img
+              src="/images/off7.png"
+              alt="Offer showcase 7"
+              className="w-full h-full object-contain"
+            /></a>
+          </div>
+          <div className="relative aspect-[3/4] rounded-xl border-2 border-orange-200 overflow-hidden shadow-sm bg-white">
+            <a href="/images/off8.png" target="_blank" rel="noopener noreferrer" className="block w-full h-full"><img
+              src="/images/off8.png"
+              alt="Offer showcase 8"
+              className="w-full h-full object-contain"
+            /></a>
+          </div>
+          <div className="relative aspect-[3/4] rounded-xl border-2 border-orange-200 overflow-hidden shadow-sm bg-white">
+            <a href="/images/off9.png" target="_blank" rel="noopener noreferrer" className="block w-full h-full"><img
+              src="/images/off9.png"
+              alt="Offer showcase 9"
+              className="w-full h-full object-contain"
+            /></a>
+          </div>
+          <div className="relative aspect-[3/4] rounded-xl border-2 border-orange-200 overflow-hidden shadow-sm bg-white">
+            <a href="/images/off10.png" target="_blank" rel="noopener noreferrer" className="block w-full h-full"><img
+              src="/images/off10.png"
+              alt="Offer showcase 10"
+              className="w-full h-full object-contain"
+            /></a>
+          </div>
+          <div className="relative aspect-[3/4] rounded-xl border-2 border-orange-200 overflow-hidden shadow-sm bg-white">
+            <a href="/images/off11.png" target="_blank" rel="noopener noreferrer" className="block w-full h-full"><img
+              src="/images/off11.png"
+              alt="Offer showcase 11"
+              className="w-full h-full object-contain"
+            /></a>
+          </div>
+          <div className="relative aspect-[3/4] rounded-xl border-2 border-orange-200 overflow-hidden shadow-sm bg-white">
+            <a href="/images/off12.png" target="_blank" rel="noopener noreferrer" className="block w-full h-full"><img
+              src="/images/off12.png"
+              alt="Offer showcase 12"
+              className="w-full h-full object-contain"
+            /></a>
+          </div>
+          <div className="relative aspect-[3/4] rounded-xl border-2 border-orange-200 overflow-hidden shadow-sm bg-white">
+            <a href="/images/off13.png" target="_blank" rel="noopener noreferrer" className="block w-full h-full"><img
+              src="/images/off13.png"
+              alt="Offer showcase 13"
+              className="w-full h-full object-contain"
+            /></a>
+          </div>
         </div>
       </section>
+
+          <div className="bg-orange-100 p-4 rounded-[1.2rem] text-slate-800 border border-orange-200 shadow-sm test2 mb-2">
+            <p className="text-xs leading-5">
+              医学&心理学升学，早已不只是为了多一纸学历和镀金而是为下一步职业方向做充足准备
+            </p>
+            <p className="text-xs leading-5">
+              <span className="text-[#ee9124] font-bold text-base">在递交申请之前，先想清楚:这个专业，能把你带到哪里，YUSHI医学与心理学团队，陪你从学业出发，把职业路径一起规划清楚。</span>
+            </p>
+          </div>
+
+      
 
       {/* 06. Footer */}
       <footer className="bg-[#fff3e6] px-8 pt-10 pb-12 flex flex-col items-center min-h-[20vh] relative border-t border-orange-100/50">
@@ -537,6 +669,31 @@ const App: React.FC = () => {
         </div>
       </footer>
     </div>
+    {lightboxSrc && (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-6">
+        <button
+          type="button"
+          className="absolute inset-0 w-full h-full"
+          onClick={() => setLightboxSrc(null)}
+          aria-label="Close image preview"
+        ></button>
+        <div className="relative z-10 max-w-[90vw] max-h-[85vh]">
+          <button
+            type="button"
+            className="absolute -top-10 right-0 text-white text-sm px-3 py-1 rounded-full bg-black/40 hover:bg-black/60"
+            onClick={() => setLightboxSrc(null)}
+          >
+            关闭
+          </button>
+          <img
+            src={lightboxSrc}
+            alt={lightboxAlt}
+            className="max-w-[90vw] max-h-[85vh] object-contain rounded-lg shadow-2xl bg-white"
+          />
+        </div>
+      </div>
+    )}
+    </>
   );
 };
 
