@@ -648,7 +648,6 @@ const App: React.FC = () => {
           </div>
           
           <div className="w-[1px] bg-[#ee9124]/20 shrink-0"></div>
-
           <div className="flex-none text-center">
             <h4 className="text-[#ee9124] font-bold text-[15px] mb-2">官方微信</h4>
             <div className="w-16 h-16 bg-white p-1 rounded-lg shadow-sm border border-orange-100 overflow-hidden flex items-center justify-center mx-auto">
