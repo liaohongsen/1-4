@@ -517,7 +517,7 @@ const App: React.FC = () => {
       <section id="offers" className="relative pb-10">
         <div className="px-8 mb-6 flex items-center gap-3">
           <div className="w-1.5 h-8 orange-gradient rounded-full"></div>
-          <h2 className="text-2xl font-bold text-slate-900 serif">部分Ofer榜单展示</h2>
+          <h2 className="text-2xl font-bold text-slate-900 serif">部分Offer榜单展示</h2>
         </div>
         <div className="px-8 grid grid-cols-2 gap-3">
           <div className="relative aspect-[3/4] rounded-xl border-2 border-orange-200 overflow-hidden shadow-sm bg-white">
